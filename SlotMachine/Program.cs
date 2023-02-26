@@ -18,6 +18,8 @@ var isCustomerPlaying = true;
 while (isCustomerPlaying)
 {
     customer.Stake = customerService.GetStakeFromInput(customer.Balance, inputService);
+    customer = customerService.SubtractBalance(customer, customer.Stake);
+
     var slotGameResult = slotGameService.PlaySlotGame(slotGameConfiguration);
     slotGameService.DisplaySlotGameTableResults(slotGameResult, inputService);
 
@@ -31,7 +33,6 @@ while (isCustomerPlaying)
     }
     else
     {
-        customer = customerService.SubtractBalance(customer, customer.Stake);
         inputService.WriteLine($"You have lost: {customer.Stake}");
         inputService.WriteLine($"Current balance is: {customer.Balance}");
 
